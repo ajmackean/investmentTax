@@ -10,7 +10,9 @@ public class PackageDriver {
 		
 		LoginMenu c1 = new LoginMenu();
 		
-		c1.loginLoop();
+//		c1.loginLoop();
+		
+		Portfolio test = new Portfolio("Penis");
 		
 		input.close();
 		

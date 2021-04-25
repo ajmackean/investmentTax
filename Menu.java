@@ -2,8 +2,6 @@ import java.io.File;
 
 public class Menu {
 	
-	// this seems to be functioning ok
-	
 	// menu selection constants
 	private final int READ_USER = 1;
 	private final int PRINT_USER = 2;
@@ -20,7 +18,7 @@ public class Menu {
 		do {
 			
 			System.out.println("What would you like to do?");
-			System.out.println("1. Read user input \n2. Print file \n3. Quit");
+			System.out.println("1. Manage portfolio \n2. Print portfolio summary \n3. Quit");
 			
 			// data type verification
 			if (PackageDriver.input.hasNextInt()) {
@@ -28,9 +26,8 @@ public class Menu {
 				
 				// selection verification
 				if (menuSelection == READ_USER) {
-					System.out.println("Please enter something");
-					PackageDriver.input.nextLine();
-					newFile.readInputData(userName);
+					// this will make a new portfolio?
+					// chain constructor here to portfolio menu
 				}
 				
 				else if (menuSelection == PRINT_USER) {
