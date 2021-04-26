@@ -11,6 +11,8 @@ public class LoginMenu {
 	
 	public LoginMenu() {
 		
+		this.loginLoop();
+		
 	}
 	
 	public void loginLoop() {

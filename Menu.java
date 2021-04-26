@@ -26,11 +26,14 @@ public class Menu {
 				
 				// selection verification
 				if (menuSelection == READ_USER) {
+					
+					Portfolio user = new Portfolio(userName);
 					// this will make a new portfolio?
 					// chain constructor here to portfolio menu
 				}
 				
 				else if (menuSelection == PRINT_USER) {
+					// need to check if file exists / is empty
 					newFile.printFile(userName);
 				}
 				

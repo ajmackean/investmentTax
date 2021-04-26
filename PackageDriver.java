@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Scanner;
 
 
@@ -9,11 +11,7 @@ public class PackageDriver {
 	public static void main(String[] args) {
 		
 		LoginMenu c1 = new LoginMenu();
-		
-//		c1.loginLoop();
-		
-		Portfolio test = new Portfolio("Penis");
-		
+
 		input.close();
 		
 	}

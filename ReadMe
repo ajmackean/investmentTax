@@ -1,23 +1,28 @@
 ReadMe
 
-Side Project just examining application dev. 
+Working project examining BgDecimal functionality as well as Java io. 
+Currently tracking high risk investment funds for capitol gains tax calculations. 
+Plans to implement basic encryption in the future. 
 
-Try writing input / output to a file for long term storage
-
-needs a gui.
-
-then integrate that file saving into a crypto traker. 
-
-then integrate a projection model
-
-But what does it do? 
-
-	Track crypto investments to see over under of current portfolio / each coin breakdown and performance. 
+-----
+Tasks
+-----
 	
-	Project growth based on historic trends? 
+	(1) Portfolio line 21
+		- Currently new users cannot be properly instantiated. Need selection structure to check if path 
+		  exists for the object file. If not, this line will not run. 
+		  
+	(2) Need to finish multitude of menu option functionality throughout the program. 
 	
+	(3) Not sure about the instantiation of Class FileObject. Portfolio objects have similar methods that exist 
+		in a dependant class and functionality seems smoother. Potentially rework the Login file instantition. 
+		Potentially create serializable objects to compare against? 
+		
+	(4) Low priority until application is functional - implement Jsoup parser to update price objects / totals dynamically. 
+		This may be a bigger task than the learning purposes of this project though. 
+		
+	(5) Internal class documentation could be better. Update comments, potentially add Javadoc
 	
-	
-User creation works. 
+	(6) Include some basic data encryption. Potentially beneficial learning exercise. 
 
-IT SHOULD TRACK MY TAXES
+

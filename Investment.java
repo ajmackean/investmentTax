@@ -1,13 +1,17 @@
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
-public class Investment {
+public class Investment implements Serializable{
 	
 	// these should list individual investments
 	
 	private String name;
 	private BigDecimal amount; 
+	private BigDecimal initialUnitValue;
+	private BigDecimal initialInvestmentTotal;
+	private BigDecimal changeInValue;
 	private BigDecimal currentValue;
-	private BigDecimal totalValue;
 	
 	public Investment() {
 		
@@ -38,10 +42,10 @@ public class Investment {
 		
 		do {
 			
-			System.out.println("Please enter the current price");
+			System.out.println("Please enter the current price of one unit");
 			
 			if (PackageDriver.input.hasNextBigDecimal()) {
-				this.currentValue = PackageDriver.input.nextBigDecimal();
+				this.initialUnitValue = PackageDriver.input.nextBigDecimal();
 				invalid = false;
 			}
 			
@@ -56,13 +60,73 @@ public class Investment {
 		invalid = true; 
 		
 		// calculate current investment value
-		this.totalValue = amount.multiply(currentValue);
+		this.initialInvestmentTotal = amount.multiply(initialUnitValue);
+		this.currentValue = initialInvestmentTotal;
 		
-		System.out.println("Name: " +name);
-		System.out.println("Price per unit: " + currentValue);
-		System.out.println("Total investment value: " + totalValue);
 		
 	}
 	
-
+	// loop to update the value of the individual investments
+	public void setCurrentValue() {
+		
+		// loop control sentinel 
+		boolean invalid = true;
+		
+		System.out.println("What is the current value of " + name + " per unit?");
+		
+		while (invalid) {
+						
+			if (PackageDriver.input.hasNextBigDecimal()) {
+				
+				// sets the current portfolio value 
+				this.currentValue = amount.multiply(PackageDriver.input.nextBigDecimal());
+				invalid = false;
+			}
+						
+			else {
+							
+				System.out.println("Error. Please enter a valid number");
+							
+			} // end of validation loop
+		}
+		
+		// updates the changeInValue field. Duplicated code, potentially redundant. In future find way to simplify.
+		changeInValue = currentValue.subtract(initialInvestmentTotal);
+	}
+	
+	// prints out the investment breakdown of each object in the portfolio array
+	public void printBreakdown() {
+			
+		System.out.println("=====================================================");
+		System.out.println("Name: " + name);
+		System.out.println("Purchased " + amount.setScale(2, RoundingMode.HALF_DOWN) + " units of " + name 
+				+ " for $" + initialUnitValue.setScale(2, RoundingMode.HALF_DOWN));
+		System.out.println("Investment is currently valued at $" + currentValue.setScale(2, RoundingMode.HALF_DOWN));
+		
+		// print profit or loss
+		changeInValue = currentValue.subtract(initialInvestmentTotal);
+		
+		if (changeInValue.compareTo(BigDecimal.ZERO) == 0) {
+			System.out.println("No change in investment value");
+		}
+		
+		else if (changeInValue.compareTo(BigDecimal.ZERO) > 0) {
+			System.out.println("Profit of $" + changeInValue.setScale(2, RoundingMode.HALF_DOWN));
+		}
+		
+		else if (changeInValue.compareTo(BigDecimal.ZERO) < 0) {
+			System.out.println("Loss of -$" + changeInValue.setScale(2, RoundingMode.HALF_DOWN));
+		}
+		
+		else {
+			// there should be no way for this to trigger. Kept here as data validation though.
+			System.out.println("Error in calculating the change in value.");
+		}
+		// change in value = current total - initial total
+		System.out.println("=====================================================");
+	}
+	
+	public BigDecimal getCurrentValue() {
+		return currentValue;
+	}
 }

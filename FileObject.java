@@ -1,9 +1,11 @@
 import java.io.*;
 import java.util.Scanner;
 
+// to do: import io objects and methods from Portfolio to exist here. Functionality and coupling is poor currently
+
 public class FileObject {
 	
-	// instantiates a file object
+	// instantiates a file object for login purposes
 	public FileObject(String userName) {
 	
 		try {
@@ -13,9 +15,7 @@ public class FileObject {
 			
 			if (myObj.createNewFile()) {
 				
-				// creates new data file for the user
-				File dataFile = new File("data/" + userName + ".txt");
-				dataFile.createNewFile();
+				// notifies that the new user was created successfully
 				System.out.println("User " + userName + " created successfully");
 			
 			} else {
@@ -33,7 +33,7 @@ public class FileObject {
 		} 
 	}
 	
-	// prints the object
+	// prints the login object file based on userName in conjunction with path
 	public void printFile(String userName) {
 		
 		try {
@@ -59,7 +59,7 @@ public class FileObject {
 		
 	}
 	
-	
+	// reads user input
 	public void readInputData(String userName) {
 		
 		try {
@@ -79,6 +79,7 @@ public class FileObject {
 		
 		}
 		
+	// method to read stored password for login purposes	
 	}	public void readInputPassword(String userName) {
 		
 		try {
@@ -99,6 +100,6 @@ public class FileObject {
 		}
 		
 	}
-	
+
 }
 	
