@@ -35,10 +35,8 @@ public class LoginMenu {
 				// selection structure
 				if (selection == 1) {
 					
-					System.out.println("Login");
 					userLogin();
 					invalid = false;
-					// calls login method
 					
 				}
 				
@@ -60,7 +58,6 @@ public class LoginMenu {
 				
 				else if (selection == 4) {
 					
-					System.out.println("Quit");
 					invalid = false;
 					// quits
 					
@@ -90,9 +87,49 @@ public class LoginMenu {
 	}
 
 	public void userLogin() {
-		
+
 		// asks for username and password. If that matches up it open the /data/username file
 		
+		// if user exists, ask for login code
+		boolean invalid = true;
+		
+		do {
+			
+			System.out.println("Please enter your username");
+			PackageDriver.input.nextLine();
+			userName = PackageDriver.input.nextLine();
+			Path myPath = Paths.get("user/" + userName + ".txt");
+			
+			if (Files.exists(myPath)) {
+				
+				boolean nestedInvalid = true;
+				invalid = false;
+				
+				do {
+					
+					System.out.println("Please enter your password");
+					this.password = PackageDriver.input.nextLine();
+					
+					FileObject login = new FileObject();
+					
+					if (password.equals(login.returnLogin(userName))){
+						Menu newMenu = new Menu(userName);
+						nestedInvalid = false;
+					}
+					
+					else {
+						System.out.println("Incorrect password. Please try again");
+					}
+					
+				} while (nestedInvalid);
+				
+			}
+			
+			else {
+				System.out.println("User does not exist");
+			}
+			
+		} while (invalid);
 		
 	}
 	
@@ -134,7 +171,7 @@ public class LoginMenu {
 				newFile.readInputPassword(userName);
 				
 				// creates a new menu, enters menu loop
-				Menu newMenu = new Menu(userName, newFile);
+				Menu newMenu = new Menu(userName);
 						
 				invalid = false;
 			}

@@ -7,7 +7,7 @@ public class Menu {
 	private final int PRINT_USER = 2;
 	private final int QUIT= 3;
 	
-	public Menu(String userName, FileObject newFile) {
+	public Menu(String userName) {
 		
 		System.out.println("Welcome " + userName);
 		// loop sentinel for data verification / menu selection
@@ -28,13 +28,16 @@ public class Menu {
 				if (menuSelection == READ_USER) {
 					
 					Portfolio user = new Portfolio(userName);
-					// this will make a new portfolio?
-					// chain constructor here to portfolio menu
+					invalid = false;
+
 				}
 				
 				else if (menuSelection == PRINT_USER) {
-					// need to check if file exists / is empty
-					newFile.printFile(userName);
+					
+					Portfolio summary = new Portfolio(1, userName);
+					// NEEDS TO PRINT A PORTFOLIO SUMMARY
+					
+					
 				}
 				
 				else if (menuSelection == QUIT) {

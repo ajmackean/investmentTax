@@ -9,7 +9,7 @@ public class Portfolio implements Serializable{
 	private ArrayList <Investment> investmentPortfolio = new ArrayList<Investment>();
 	private String userName;
 	
-	private BigDecimal portfolioCurrentTotal = new BigDecimal(99);
+	private BigDecimal portfolioCurrentTotal = new BigDecimal(0);
 	double test = 0;
 	
 	// will have to track some things like total value, change in portfolio value, that kind of stuff
@@ -17,7 +17,8 @@ public class Portfolio implements Serializable{
 	public Portfolio(String userName) {
 		
 		this.userName = userName;
-		// this readObjectFile will break code if non existant. Need to compare against path for new users
+		
+		// should implement a selection structure to not call this if new user. Currently throws ignored exception. 
 		this.readObjectFile();
 		
 		System.out.println("Welcome to " + userName + "'s investment portfolio. \nPlease make a selection");
@@ -78,7 +79,6 @@ public class Portfolio implements Serializable{
 				// quit the program
 				else if (selection == 4) {
 					
-					System.out.println("See ya nerd");
 					this.printObjectFile();
 					invalid = false;
 				}
@@ -101,6 +101,32 @@ public class Portfolio implements Serializable{
 			}
 			
 		} while (invalid);
+		
+	}
+	// constructor to differentiate parent selection. Clumsy but works, potential retool logic in main constructor call
+	public Portfolio(int number, String userName) {
+		
+		this.userName = userName;
+		this.readObjectFile();
+		if (investmentPortfolio.size() == 0){
+			System.out.println("No items in the array");
+			
+		}
+		
+		else {
+			
+			for (Investment total: investmentPortfolio) {
+				
+				// sets the portfolio value for each investment
+				this.portfolioCurrentTotal = portfolioCurrentTotal.add(total.getCurrentValue());
+
+			}
+			
+			// print the total portfolio value
+			System.out.println("\n\n***** Current value of total investments: $" + portfolioCurrentTotal + " *****\n\n");
+			
+		}
+
 		
 	}
 
@@ -132,11 +158,11 @@ public class Portfolio implements Serializable{
 			fileIn.close();
 			return;
 	
+		// will throw exception if new user is instantiated. Ignored for now, proper workaround of selection structure 
+		// should be implemented if path does not exist.
 		} catch (IOException i) {
-			i.printStackTrace();
 			return;
 		} catch (ClassNotFoundException c) {
-			c.printStackTrace();
 			return;
 		}
 		

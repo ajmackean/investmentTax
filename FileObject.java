@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
 
-// to do: import io objects and methods from Portfolio to exist here. Functionality and coupling is poor currently
+// eliminate this class, integrate functions into respective classes they are used in. 
 
 public class FileObject {
 	
@@ -33,13 +33,40 @@ public class FileObject {
 		} 
 	}
 	
+	public FileObject() {
+		
+	}
+	
+	public String returnLogin(String userName) {
+		
+		String login = "NULL";
+		
+		try {
+			
+			File myObj = new File("user/" + userName + ".txt");
+			Scanner myReader = new Scanner(myObj);
+			
+			while (myReader.hasNextLine()) {
+				
+				login = myReader.nextLine();
+			}
+			
+			return login;
+			
+			
+		} catch (IOException e) {
+			return "error";
+		}
+
+	}
+	
 	// prints the login object file based on userName in conjunction with path
 	public void printFile(String userName) {
 		
 		try {
 			
 			// gets path value
-			File myObj = new File("data/" + userName + ".txt");
+			File myObj = new File("user/" + userName + ".txt");
 			// opens scanner object with path as input
 			Scanner myReader = new Scanner(myObj);
 			
