@@ -1,5 +1,7 @@
 ReadMe
 
+test
+
 Working project examining BgDecimal functionality as well as Java io. 
 Currently tracking high risk investment funds for capitol gains tax calculations. 
 Plans to implement basic encryption in the future. 
